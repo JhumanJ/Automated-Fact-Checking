@@ -56,8 +56,9 @@ def computedInvertedIndex(wikiArticles):
     # Now, build an inverted index for all documents
     # Load it, if it was already built
     if os.path.isfile(docInvertedIndexFile):
+        print("Loading inverted index.")
         invertedIndex = openJsonDict(docInvertedIndexFile)
-        print('Inverted index loaded.')
+        print("Inverted index loaded. Length: {}".format(len(invertedIndex)))
     else:
         # Not done yet, build index
         invertedIndex = {}
@@ -71,9 +72,12 @@ def computedInvertedIndex(wikiArticles):
                     invertedIndex[word] = []
                 # Add word to word index (in doc)
                 invertedIndex[word].append((key, wordCounts[word]))
+        print("Inverted index computed. Now saving it.")
         # Save inverted index
         saveDictToJson(invertedIndex, docInvertedIndexFile)
-        print('Inverted index built.')
+        print('Inverted index saved.')
+
+    return invertedIndex
 
 """
 Compute tf-idf for each word in each in the whole doc collection (for relevant docs)
@@ -125,6 +129,7 @@ def getClaimsVsDocScore(claims,wikiArticles):
         claimsTfIdf = openJsonDict(claimsTfIdfFile)
         print('Claims tf-idf scores loaded.')
     else:
+        print('Building tf-idf index for claims.')
         claimsTfIdf = computeTfIdfForClaims(claims, invertedIndex, len(wikiArticles))
         saveDictToJson(claimsTfIdf, claimsTfIdfFile)
         print('Claims tf-idf index built.')

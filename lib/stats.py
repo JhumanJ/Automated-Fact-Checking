@@ -70,8 +70,6 @@ def computeTfIdfForClaims(claims,invertedIndex,documentCount):
     tfIDfClaims = []
 
     for claim in tqdm(claims):
-
-
         tfIDfClaims.append(computeTfIdf(claim['claim'],claim['id'],invertedIndex,documentCount))
 
     return tfIDfClaims
