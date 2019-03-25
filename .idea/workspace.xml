@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c27384f-8917-4ddd-9aa3-b455f88cfc13" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/datasets_parsing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/graph.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/stats.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/paths.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/q1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/q2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/q3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/termFrequencies.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/q1.py" beforeDir="false" afterPath="$PROJECT_DIR$/q1.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +64,7 @@
         <entry file="file://$PROJECT_DIR$/q1.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
-              <caret line="79" column="31" selection-start-line="79" selection-start-column="31" selection-end-line="79" selection-end-column="31" />
+              <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
               <folding>
                 <element signature="e#1#35#0" expanded="true" />
               </folding>
@@ -155,8 +149,8 @@
         <option value="$PROJECT_DIR$/lib/datasets_parsing.py" />
         <option value="$PROJECT_DIR$/lib/stats.py" />
         <option value="$PROJECT_DIR$/q3.py" />
-        <option value="$PROJECT_DIR$/q1.py" />
         <option value="$PROJECT_DIR$/q2.py" />
+        <option value="$PROJECT_DIR$/q1.py" />
       </list>
     </option>
   </component>
@@ -236,8 +230,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23828755" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23828755" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -251,7 +246,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.29863015" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.29863015" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -452,7 +447,7 @@
     <entry file="file://$PROJECT_DIR$/q1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
-          <caret line="79" column="31" selection-start-line="79" selection-start-column="31" selection-end-line="79" selection-end-column="31" />
+          <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
           <folding>
             <element signature="e#1#35#0" expanded="true" />
           </folding>

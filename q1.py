@@ -75,6 +75,4 @@ def question1():
     print("Total length: {}".format(totalLength))
     print("So k is almost the same as the last rank.")
 
-# question1()
-wikiArticles = parse_wiki(wiki_pages_path,wiki_parsed_cache_path)
-print(list(wikiArticles.keys())[2397744])
+question1()
