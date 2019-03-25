@@ -65,7 +65,7 @@ def computedInvertedIndex(wikiArticles):
         # For each article, count words and add them to the inverted index
         for key, value in tqdm(wikiArticles.items()):
             wordCounts = wordCount(splitWords(value))
-            for word, value in tqdm(wordCounts.items()):
+            for word in wordCounts:
                 # Init word in index if not already set
                 if not word in invertedIndex:
                     invertedIndex[word] = []

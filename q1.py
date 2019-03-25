@@ -34,8 +34,8 @@ def getTextStatistics():
             else:
                 wordsDictionnary[word] = 1
 
-    print("Dictionary created. Now saving it.")
     saveDictToJson(wordsDictionnary,outputFilename)
+    print("Dictionary created. Now saving it.")
 
     return wordsDictionnary
 
