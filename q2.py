@@ -81,13 +81,16 @@ def computedInvertedIndex(wikiArticles):
 
     return invertedIndex
 
-def computeDocIdf(invertedIndex,documentCount):
+def computeDocIdf(wikiArticles,documentCount):
 
     if os.path.isfile(docIdfFile):
         print("Loading document idf file.")
         docIdf = openJsonDict(docIdfFile)
         print("Document idf. Length: {}".format(len(docIdf)))
     else:
+
+        # Load inverted index
+        invertedIndex = computedInvertedIndex(wikiArticles)
 
         docIdf = {}
         for key, value in tqdm(invertedIndex.items()):
@@ -154,20 +157,19 @@ def getClaimsVsDocScore(claims,wikiArticles):
     if os.path.isfile(cosineSimFile):
         return openJsonDict(cosineSimFile)
 
-    # Load inverted index
-    invertedIndex = computedInvertedIndex(wikiArticles)
-
     # Load doc idf
     numberDocs = len(wikiArticles)
-    docIdf = computeDocIdf(invertedIndex, numberDocs)
+    docIdf = computeDocIdf(wikiArticles,numberDocs)
 
     # Compute tf-idf for each claim
     if os.path.isfile(claimsTfIdfFile):
         claimsTfIdf = openJsonDict(claimsTfIdfFile)
-        del invertedIndex # no need for it anymore, clear memory
         print('Claims tf-idf scores loaded.')
     else:
         print('Building tf-idf index for claims.')
+        # Load inverted index
+        invertedIndex = computedInvertedIndex(wikiArticles)
+
         claimsTfIdf = computeTfIdfForClaims(claims, invertedIndex, len(wikiArticles))
         saveDictToJson(claimsTfIdf, claimsTfIdfFile)
         del invertedIndex # no need for it anymore, clear memory
