@@ -170,7 +170,7 @@ def getClaimsVsDocScore(claims,wikiArticles):
         # Load inverted index
         invertedIndex = computedInvertedIndex(wikiArticles)
 
-        claimsTfIdf = computeTfIdfForClaims(claims, invertedIndex, len(wikiArticles))
+        claimsTfIdf = computeTfIdfForClaims(claims, invertedIndex, numberDocs)
         saveDictToJson(claimsTfIdf, claimsTfIdfFile)
         del invertedIndex # no need for it anymore, clear memory
         print('Claims tf-idf index built.')
