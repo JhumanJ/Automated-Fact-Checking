@@ -51,6 +51,8 @@ def computeIDF(words, invertedIndex, documentCount, docIdf=None):
 Compute td idf
 Can ignore document id
 """
+
+
 def computeTfIdf(text, id, invertedIndex, documentCount, docIdf=None):
     words = splitWords(text)
 
@@ -75,6 +77,8 @@ def computeTfIdf(text, id, invertedIndex, documentCount, docIdf=None):
 """
 Computed tf-idf for a set of claims.
 """
+
+
 def computeTfIdfForClaims(claims, invertedIndex, documentCount):
     tfIDfClaims = []
 
@@ -87,6 +91,8 @@ def computeTfIdfForClaims(claims, invertedIndex, documentCount):
 """
 Given two tf-idf dict, return the cosin similiarity
 """
+
+
 def cosineSim(a, b):
     words = set(list(a.keys()) + list(b.keys()))
     a = [(a[word] if word in a else 0) for word in words]
@@ -99,8 +105,10 @@ def cosineSim(a, b):
 
 
 """
-Given a document and a set of words (possibly used in a query), return thes
+Given a document and a set of words (possibly used in a query), return 
 the query likelyhood model
+
+So this is without smoothing!
 """
 
 
@@ -119,13 +127,34 @@ def computeQueryLikelihoodModel(docWords, queryWords):
 
 
 """
+Same as above with Laplace smoothing.
+"""
+def computeLaplaceQueryLikelihoodModel(docWords, queryWords, vocSize):
+    nbWords = len(docWords)
+    wordCounts = wordCount(docWords)
+
+    model = {}
+
+    # Precompute default value for a missing word
+    defaultVal = float(1.0) / (nbWords + vocSize)
+
+    for key in queryWords:
+        if not key in wordCounts:
+            model[key] = defaultVal
+        else:
+            model[key] = float(wordCounts[key] + 1) / (nbWords + vocSize)
+
+    return model
+
+
+"""
 Compute query score for a given model and a given query
 query has to be a list of words
 """
 
 
 def computeQueryScore(model, query):
-    score = 1
+    score = 1.0
     for word in query:
         if model[word] == 0:
             return 0

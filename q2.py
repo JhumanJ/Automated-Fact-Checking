@@ -159,7 +159,6 @@ def getClaimsVsDocScore(claims,wikiArticles):
 
     # Load doc idf
     numberDocs = len(wikiArticles)
-    docIdf = computeDocIdf(wikiArticles,numberDocs)
 
     # Compute tf-idf for each claim
     if os.path.isfile(claimsTfIdfFile):
@@ -178,7 +177,9 @@ def getClaimsVsDocScore(claims,wikiArticles):
     # Create docTfIdfFile
     if not os.path.isfile(docTfIdfFile):
         print("Cache doc id not found.")
+        docIdf = computeDocIdf(wikiArticles, numberDocs)
         computedTfIdfForDocs(claimsTfIdf, wikiArticles, docIdf)
+        del docIdf # not needed anymore here
 
     # load td-idf documents
     docsTfIdf = {}

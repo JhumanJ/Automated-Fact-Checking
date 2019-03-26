@@ -3,6 +3,7 @@ from lib.datasets_parsing import *
 from lib.stats import *
 from paths import *
 from tqdm import tqdm
+from q1 import getTextStatistics
 
 import os, json
 
@@ -36,6 +37,15 @@ def question3():
         words = set(removeStopWords(splitWords(claim['claim'])))
         claimWords = claimWords.union(words)
 
+    # Compute vocabulary size and collection frequency (using result from q1)
+    wordsDictionnary = getTextStatistics()
+    vocSize = len(wordsDictionnary.keys())
+    collectionFrequency = sum(wordsDictionnary.values())
+    print("Vocabulary size: {}, collection frequency: {}".format(vocSize,collectionFrequency))
+
+
+    del wordsDictionnary
+
     # Now for each document, compute query likelihood model for this set of words
     # Create docQueryLikelihood
     if not os.path.isfile(docQueryLikelihood):
@@ -44,9 +54,15 @@ def question3():
             wikiArticles = parse_wiki(wiki_pages_path, wiki_parsed_cache_path)
             print('Wiki articles loaded.')
 
+
             for id, doc in tqdm(wikiArticles.items()):
                 words = splitWords(doc)
-                w.write(id + "\t" + json.dumps(computeQueryLikelihoodModel(words, claimWords)) + "\n")
+                # Without smoothing
+                models = {
+                    'no-smooth': computeQueryLikelihoodModel(words, claimWords),
+                    'laplace': computeLaplaceQueryLikelihoodModel(words, claimWords,vocSize),
+                }
+                w.write(id + "\t" + json.dumps(models) + "\n")
             del wikiArticles
         print('docQueryLikelihood computed.')
 
