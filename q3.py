@@ -65,13 +65,14 @@ def question3():
                     'dirichlet': computeDirichletQueryLikelihoodModel(words, claimWords, wordsDictionnary, collectionFrequency, avgWordPerDocument)
                 }
                 w.write(id + "\t" + json.dumps(models) + "\n")
-                print(models)
 
-            # Not needed anymore
-            del wikiArticles
-            del wordsDictionnary
+    print('docQueryLikelihood computed.')
+    # Not needed anymore
+    del wikiArticles
+    del wordsDictionnary
 
-        print('docQueryLikelihood computed.')
+    print('Now need to compute score for each claim')
+    return
 
     # Now find top 5 for each claim
     for claim in claims:

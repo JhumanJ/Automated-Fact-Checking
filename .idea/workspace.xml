@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c27384f-8917-4ddd-9aa3-b455f88cfc13" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/lib/stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/stats.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/q3.py" beforeDir="false" afterPath="$PROJECT_DIR$/q3.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,13 +48,13 @@
         <counts>
           <entry key="dummy" value="15" />
           <entry key="gitignore" value="55" />
-          <entry key="py" value="14136" />
+          <entry key="py" value="14198" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="70" />
-          <entry key="Python" value="14136" />
+          <entry key="Python" value="14198" />
         </counts>
       </usages-collector>
     </session>
@@ -65,8 +64,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/q3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
+            <state relative-caret-position="171">
+              <caret line="73" column="51" selection-start-line="73" selection-start-column="51" selection-end-line="73" selection-end-column="51" />
               <folding>
                 <element signature="e#1#35#0" expanded="true" />
               </folding>
@@ -77,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/stats.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="190" column="110" selection-start-line="190" selection-start-column="41" selection-end-line="190" selection-end-column="110" />
+            <state relative-caret-position="114">
+              <caret line="185" column="3" lean-forward="true" selection-start-line="185" selection-start-column="3" selection-end-line="185" selection-end-column="3" />
               <folding>
                 <element signature="e#26#37#0" expanded="true" />
                 <marker date="1553619218001" expanded="true" signature="2555:2556" ph="..." />
@@ -441,8 +440,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/stats.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="190" column="110" selection-start-line="190" selection-start-column="41" selection-end-line="190" selection-end-column="110" />
+        <state relative-caret-position="114">
+          <caret line="185" column="3" lean-forward="true" selection-start-line="185" selection-start-column="3" selection-end-line="185" selection-end-column="3" />
           <folding>
             <element signature="e#26#37#0" expanded="true" />
             <marker date="1553619218001" expanded="true" signature="2555:2556" ph="..." />
@@ -452,8 +451,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/q3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
+        <state relative-caret-position="171">
+          <caret line="73" column="51" selection-start-line="73" selection-start-column="51" selection-end-line="73" selection-end-column="51" />
           <folding>
             <element signature="e#1#35#0" expanded="true" />
           </folding>
