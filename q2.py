@@ -90,8 +90,8 @@ def computeDocIdf(invertedIndex,documentCount):
     else:
 
         docIdf = {}
-        for key, value in tqdm(enumerate(invertedIndex)):
-            docIdf[key] = math.log10(float(documentCount) / len(invertedIndex[key]))
+        for key, value in tqdm(invertedIndex.items()):
+            docIdf[key] = math.log10(float(documentCount) / len(value))
         print("Document idf computed. Now saving it. Length: {}".format(len(docIdf)))
         saveDictToJson(docIdf, docIdfFile)
         print('Document idf saved.')
