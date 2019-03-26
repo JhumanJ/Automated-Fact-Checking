@@ -7,6 +7,8 @@ from tqdm import tqdm
 import os, json
 
 docInvertedIndexFile = output_path + 'docInvertedIndex.json'
+docIdfFile = output_path + 'docIdf.json'
+
 claimsTfIdfFile = output_path + 'claimsTfIdfFile.json'
 docTfIdfFile = cache_path + 'docTfIdfFile.txt'
 cosineSimFile = output_path + 'similarity-score.json'
@@ -79,10 +81,29 @@ def computedInvertedIndex(wikiArticles):
 
     return invertedIndex
 
+def computeDocIdf(invertedIndex,documentCount):
+
+    if os.path.isfile(docIdfFile):
+        print("Loading document idf file.")
+        docIdf = openJsonDict(docIdfFile)
+        print("Document idf. Length: {}".format(len(docIdf)))
+    else:
+
+        docIdf = {}
+        for key, value in tqdm(enumerate(invertedIndex)):
+            docIdf[key] = math.log10(float(documentCount) / len(invertedIndex[key]))
+        print("Document idf computed. Now saving it. Length: {}".format(len(docIdf)))
+        saveDictToJson(docIdf, docIdfFile)
+        print('Document idf saved.')
+
+    return docIdf
+
+
 """
 Compute tf-idf for each word in each in the whole doc collection (for relevant docs)
 """
 def computedTfIdfForDocs(claimsTfIdf,wikiArticles,invertedIndex):
+
     # Compute idtf for each document is a very long task, so we are going to pre-filter the set of documents
     # to keep only the one containing important words for claims.
     # We set a minimum of 0.2 as tfidf value for important words
@@ -104,11 +125,16 @@ def computedTfIdfForDocs(claimsTfIdf,wikiArticles,invertedIndex):
                 break
     print("{} relevant documents found.".format(len(relevantDocs)))
 
+
+    # Load doc idf
+    numberDocs = len(wikiArticles)
+    docIdf = computeDocIdf(invertedIndex,numberDocs)
+
     # For each doc write a line with the tf-idf json
     print('Now computing tf-idf for documents.')
     with open(docTfIdfFile, "a") as w:
         for id, doc in tqdm(relevantDocs.items()):
-            w.write(id + "\t" + json.dumps(computeTfIdf(doc, id, invertedIndex, len(wikiArticles), True)) + "\n")
+            w.write(id + "\t" + json.dumps(computeTfIdf(doc, id, invertedIndex, numberDocs,docIdf)) + "\n")
 
     print('Doc tf-idf file computed.')
 
