@@ -102,39 +102,46 @@ def computeDocIdf(invertedIndex,documentCount):
 """
 Compute tf-idf for each word in each in the whole doc collection (for relevant docs)
 """
-def computedTfIdfForDocs(claimsTfIdf,wikiArticles,invertedIndex):
+def computedTfIdfForDocs(claimsTfIdf,wikiArticles,docIdf):
 
-    # Compute idtf for each document is a very long task, so we are going to pre-filter the set of documents
-    # to keep only the one containing important words for claims.
-    # We set a minimum of 0.2 as tfidf value for important words
-    print("Preparing documents filtering by finding important words in claims (min tf-idf of 0.2)")
-    importantWords = set()
-    for result in claimsTfIdf:
-        for key in result['tfidfs']:
-            if result['tfidfs'][key] > 0.2:
-                importantWords.add(key)
 
-    print("{} important words found. Now filtering docs. Now finding relevant documents.".format(len(importantWords)))
-    importantWords = removeStopWords(importantWords)
-    relevantDocs = {}
-    for id, doc in tqdm(wikiArticles.items()):
-        words = splitWords(doc)
-        for word in words:
-            if word in importantWords:
-                relevantDocs[id] = doc
-                break
-    print("{} relevant documents found.".format(len(relevantDocs)))
+    if os.path.isfile(cache_path+'relevant-docs.json'):
+        print("Loading relevant documents idf file.")
+        relevantDocs = openJsonDict(docIdfFile)
+        print("Relevant documents loaded. Length: {}".format(len(relevantDocs)))
+    else:
 
+        # Compute idtf for each document is a very long task, so we are going to pre-filter the set of documents
+        # to keep only the one containing important words for claims.
+        # We set a minimum of 0.2 as tfidf value for important words
+        print("Preparing documents filtering by finding important words in claims (min tf-idf of 0.2)")
+        importantWords = set()
+        for result in claimsTfIdf:
+            for key in result['tfidfs']:
+                if result['tfidfs'][key] > 0.2:
+                    importantWords.add(key)
+
+        print("{} important words found. Now filtering docs. Now finding relevant documents.".format(len(importantWords)))
+        importantWords = removeStopWords(importantWords)
+        relevantDocs = {}
+        for id, doc in tqdm(wikiArticles.items()):
+            words = splitWords(doc)
+            for word in words:
+                if word in importantWords:
+                    relevantDocs[id] = doc
+                    break
+        print("{} relevant documents found. Saving them.".format(len(relevantDocs)))
+        saveDictToJson(relevantDocs,cache_path+'relevant-docs.json')
+        print("Relevant docs saved.")
 
     # Load doc idf
     numberDocs = len(wikiArticles)
-    docIdf = computeDocIdf(invertedIndex,numberDocs)
 
     # For each doc write a line with the tf-idf json
     print('Now computing tf-idf for documents.')
     with open(docTfIdfFile, "a") as w:
         for id, doc in tqdm(relevantDocs.items()):
-            w.write(id + "\t" + json.dumps(computeTfIdf(doc, id, invertedIndex, numberDocs,docIdf)) + "\n")
+            w.write(id + "\t" + json.dumps(computeTfIdf(doc, id, None, numberDocs,docIdf)) + "\n")
 
     print('Doc tf-idf file computed.')
 
@@ -150,20 +157,26 @@ def getClaimsVsDocScore(claims,wikiArticles):
     # Load inverted index
     invertedIndex = computedInvertedIndex(wikiArticles)
 
+    # Load doc idf
+    numberDocs = len(wikiArticles)
+    docIdf = computeDocIdf(invertedIndex, numberDocs)
+
     # Compute tf-idf for each claim
     if os.path.isfile(claimsTfIdfFile):
         claimsTfIdf = openJsonDict(claimsTfIdfFile)
+        del invertedIndex # no need for it anymore, clear memory
         print('Claims tf-idf scores loaded.')
     else:
         print('Building tf-idf index for claims.')
         claimsTfIdf = computeTfIdfForClaims(claims, invertedIndex, len(wikiArticles))
         saveDictToJson(claimsTfIdf, claimsTfIdfFile)
+        del invertedIndex # no need for it anymore, clear memory
         print('Claims tf-idf index built.')
 
     # Create docTfIdfFile
     if not os.path.isfile(docTfIdfFile):
         print("Cache doc id not found.")
-        computedTfIdfForDocs(claimsTfIdf, wikiArticles, invertedIndex)
+        computedTfIdfForDocs(claimsTfIdf, wikiArticles, docIdf)
 
     # load td-idf documents
     docsTfIdf = {}
