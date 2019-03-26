@@ -37,21 +37,21 @@ def question3():
         words = set(removeStopWords(splitWords(claim['claim'])))
         claimWords = claimWords.union(words)
 
+    # Load wiki articles
+    wikiArticles = parse_wiki(wiki_pages_path, wiki_parsed_cache_path)
+
     # Compute vocabulary size and collection frequency (using result from q1)
     wordsDictionnary = getTextStatistics()
     vocSize = len(wordsDictionnary.keys())
     collectionFrequency = sum(wordsDictionnary.values())
-    print("Vocabulary size: {}, collection frequency: {}".format(vocSize,collectionFrequency))
-
-
-    del wordsDictionnary
+    avgWordPerDocument = float(collectionFrequency)/len(wikiArticles)
+    print("Vocabulary size: {}, collection frequency: {}, avg word per document: {}".format(vocSize,collectionFrequency,avgWordPerDocument))
 
     # Now for each document, compute query likelihood model for this set of words
     # Create docQueryLikelihood
     if not os.path.isfile(docQueryLikelihood):
         print("Cached docQueryLikelihood not found.")
         with open(docQueryLikelihood, "a") as w:
-            wikiArticles = parse_wiki(wiki_pages_path, wiki_parsed_cache_path)
             print('Wiki articles loaded.')
 
 
@@ -61,9 +61,16 @@ def question3():
                 models = {
                     'no-smooth': computeQueryLikelihoodModel(words, claimWords),
                     'laplace': computeLaplaceQueryLikelihoodModel(words, claimWords,vocSize),
+                    'jelinek': computeJelinekQueryLikelihoodModel(words, claimWords, wordsDictionnary, collectionFrequency),
+                    'dirichlet': computeDirichletQueryLikelihoodModel(words, claimWords, wordsDictionnary, collectionFrequency, avgWordPerDocument)
                 }
                 w.write(id + "\t" + json.dumps(models) + "\n")
+                print(models)
+
+            # Not needed anymore
             del wikiArticles
+            del wordsDictionnary
+
         print('docQueryLikelihood computed.')
 
     # Now find top 5 for each claim

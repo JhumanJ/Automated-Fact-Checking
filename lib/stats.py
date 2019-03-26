@@ -1,8 +1,15 @@
 """
-
+=======================================
 Stats functions
+=======================================
+"""
 
 """
+---------------------------------------
+Mostly used for Q2
+---------------------------------------
+"""
+
 import math
 import numpy as np
 from lib.utils import *
@@ -105,6 +112,12 @@ def cosineSim(a, b):
 
 
 """
+---------------------------------------
+Mostly used for Q3
+---------------------------------------
+"""
+
+"""
 Given a document and a set of words (possibly used in a query), return 
 the query likelyhood model
 
@@ -129,6 +142,8 @@ def computeQueryLikelihoodModel(docWords, queryWords):
 """
 Same as above with Laplace smoothing.
 """
+
+
 def computeLaplaceQueryLikelihoodModel(docWords, queryWords, vocSize):
     nbWords = len(docWords)
     wordCounts = wordCount(docWords)
@@ -143,6 +158,50 @@ def computeLaplaceQueryLikelihoodModel(docWords, queryWords, vocSize):
             model[key] = defaultVal
         else:
             model[key] = float(wordCounts[key] + 1) / (nbWords + vocSize)
+
+    return model
+
+
+"""
+Same as above with jelinek-mercer smoothing.
+"""
+
+
+def computeJelinekQueryLikelihoodModel(docWords, queryWords, wordsDictionnary, collectionFrequency, constant=0.5):
+    nbWords = len(docWords)
+    wordCounts = wordCount(docWords)
+
+    model = {}
+    for key in queryWords:
+        if not key in wordCounts:
+            # Here P(w|D) is 0
+            model[key] = (1.0 - constant) * (float(wordsDictionnary[key]) / collectionFrequency)
+        else:
+            model[key] = constant * (float(wordCounts[key]) / nbWords) + (1.0 - constant) * (
+                    float(wordsDictionnary[key]) / collectionFrequency)
+
+    return model
+
+
+"""
+Same as above with Dirichlet smoothing.
+"""
+
+
+def computeDirichletQueryLikelihoodModel(docWords, queryWords, wordsDictionnary, collectionFrequency, constant):
+    nbWords = len(docWords)
+    wordCounts = wordCount(docWords)
+
+    model = {}
+    for key in queryWords:
+        if not key in wordCounts:
+            # Here P(w|D) is 0
+            model[key] = (float(constant) / (float(nbWords) + constant)) * (
+                    float(wordsDictionnary[key]) / collectionFrequency)
+        else:
+            model[key] = (float(nbWords) / (float(nbWords) + constant)) * (float(wordCounts[key]) / nbWords) + (
+                    float(constant) / (float(nbWords) + constant)) * (
+                                 float(wordsDictionnary[key]) / collectionFrequency)
 
     return model
 
