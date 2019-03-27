@@ -4,12 +4,20 @@ from lib.stats import *
 from paths import *
 from tqdm import tqdm
 from q1 import getTextStatistics
+from heapq import heappush, heappushpop
 
 import os, json
 
 def question3():
 
     docQueryLikelihood = cache_path + 'docQueryLikelihood.txt'
+    fiveMostSimilarDoc = output_path + 'fiveMostSimilarDoc.json'
+
+    # If already computed just return it
+    if os.path.isfile(fiveMostSimilarDoc):
+        print("Computation already done. Loading results from: {}",fiveMostSimilarDoc)
+        print (openJsonDict(fiveMostSimilarDoc))
+        return
 
 
     # Somehow claims not in order, need to find given claims
@@ -65,30 +73,51 @@ def question3():
                     'dirichlet': computeDirichletQueryLikelihoodModel(words, claimWords, wordsDictionnary, collectionFrequency, avgWordPerDocument)
                 }
                 w.write(id + "\t" + json.dumps(models) + "\n")
+        print('docQueryLikelihood computed.')
 
-    print('docQueryLikelihood computed.')
     # Not needed anymore
     del wikiArticles
     del wordsDictionnary
 
-    print('Now need to compute score for each claim')
-    return
+    print('Now need to compute score for each claim.')
+
 
     # Now find top 5 for each claim
+    claimsScore = {}
     for claim in claims:
+        # For each claim
         query = removeStopWords(splitWords(claim['claim']))
-        print(claim['claim'], query)
-        claimScore = {}
+        claimScore = {
+            'no-smooth': [],
+            'laplace': [],
+            'jelinek': [],
+            'dirichlet': []
+        }
 
         with open(docQueryLikelihood, "r") as f:
+            # For each doc
             for line in tqdm(f, total=5396106):
-                fields = line.rstrip("\n").split("\t")
-                doc_id = fields[0]
-                model = json.loads(fields[1])
-                score = computeQueryScore(model, query)
-                if score > 0:
-                    claimScore[doc_id] = score
-        print(claimScore)
+                # For each type of smoothing
+                for key in claimScore:
+                    fields = line.rstrip("\n").split("\t")
+                    doc_id = fields[0]
+                    models = json.loads(fields[1])
+
+                    score = computeQueryScore(models[key], query)
+                    if score > 0:
+                        # Use heap to keep the top 5 of each claim
+                        if len(claimScore[key]) < 5:
+                            heappush(claimScore[key], (score,doc_id))
+                        else:
+                            heappushpop(claimScore[key], (score,doc_id))
+        claimsScore[claim['id']] = claimScore
+    print("Best score computed for each smoothing model. Now savnig it.")
+    saveDictToJson(claimsScore,fiveMostSimilarDoc)
+    print("Done saving results in : {}".format(fiveMostSimilarDoc))
+
+    print(claimsScore)
+    return
+
 
 
 question3()
