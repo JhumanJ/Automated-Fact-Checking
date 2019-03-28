@@ -38,7 +38,6 @@ def parse_wiki(wikipedia_dir, doc_id_dir):
                         data = json.loads(line.rstrip("\n"))
                         doc_id = data["id"]
                         text = data["text"]
-                        lines = data["lines"]
                         if text != "":
                             w.write(doc_id + "\t" + text + "\n")
                             doc_id_text[doc_id] = text
@@ -46,6 +45,52 @@ def parse_wiki(wikipedia_dir, doc_id_dir):
                         line = f.readline()
 
     return doc_id_text
+
+def parse_wiki_lines(wikipedia_dir, doc_id_dir):
+    """
+    Returns a dictionary lookup from document id (URL) to document lines.
+    Saves the lookup to speed up subsequent passes.
+    """
+    # doc_id_text saves the title and content of each wiki-page
+    doc_id_lines = dict()
+    try:
+        with open(doc_id_dir, "r") as f:
+            print("Reading from cache ({})".format(doc_id_dir))
+            for line in f:
+                fields = line.rstrip("\n").split("\t")
+                doc_id = fields[0]
+                lines = json.loads(fields[1])
+                doc_id_lines[doc_id] = lines
+    except Exception as error:
+        print("Error: {}".format(error))
+        print("doc_id_dir:",doc_id_dir)
+        with open(doc_id_dir, "w") as w:
+            print("Constructing " + str(doc_id_dir))
+            for i in tqdm(range(1, 110)):  # jsonl file number from 001 to 109
+                jnum = "{:03d}".format(i)
+                fname = wikipedia_dir + "wiki-" + jnum + ".jsonl"
+                with open(fname) as f:
+                    # point=f.tell()# file pointer starting from 0
+                    line = f.readline()
+                    while line:
+                        data = json.loads(line.rstrip("\n"))
+                        doc_id = data["id"]
+                        lines = data["lines"]
+
+                        doclines = {}
+                        for l in lines.split("\n"):
+                            fields = l.split("\t")
+                            if fields[0].isnumeric():
+                                l_id = int(fields[0])
+                                l_txt = fields[1]
+                                doclines[l_id] = l_txt
+
+                        if lines != "":
+                            w.write(doc_id + "\t" + json.dumps(doclines) + "\n")
+                            doc_id_lines[doc_id] = doclines
+                        line = f.readline()
+
+    return doc_id_lines
 
 
 def load_doclines(titles, t2jnum, filtering=True):
@@ -60,11 +105,11 @@ def load_doclines(titles, t2jnum, filtering=True):
         titles = filtered_titles
 
     docs = {"dummy_id": [(title, "dummy_linum") for title in titles]}
-    doclines = load_doc_lines(docs, t2jnum, wikipedia_dir="../data/wiki-pages/wiki-pages/")
+    doclines = load_doc_lines(docs, t2jnum, wikipedia_dir="../data/wiki-pages/")
     return doclines
 
 
-def load_doc_lines(docs=dict(), t2jnum=dict(), wikipedia_dir="../data/wiki-pages/wiki-pages/"):
+def load_doc_lines(docs=dict(), t2jnum=dict(), wikipedia_dir="../data/wiki-pages/"):
     """Returns a dictionary from titles to line numbers to line text.
     Args
     docs: {claim_id: [(title, sentence_num),  ...], ...}
