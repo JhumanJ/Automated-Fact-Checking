@@ -17,6 +17,7 @@ def getTextStatistics():
 
     # Check if result file already exists and return it
     if os.path.isfile(outputFilename):
+        print('Reading text statistics from cache.')
         return openJsonDict(outputFilename)
 
     # If file does not exist, we create it
@@ -75,4 +76,5 @@ def question1():
     print("Total length: {}".format(totalLength))
     print("So k is almost the same as the last rank.")
 
-question1()
+if __name__ == "__main__":
+    question1()
