@@ -126,7 +126,7 @@ def question4(nbClaims = 10000):
     allClaims = load_dataset_json(train_path)
 
     for claim in allClaims:
-        if claim['id'] in claimsID:
+        if str(claim['id']) in claimsID:
             claims.append(claim)
             claimsID.remove(claim['id'])
 
