@@ -86,7 +86,7 @@ def computeTop5dirichlet(claims,relevantDocs):
         top5 = []
 
         # Find best documents
-        for docId in relevantDocs[claim['id']]:
+        for docId in relevantDocs[str(claim['id'])]:
             doc = wikiArticles[docId]
             words = splitWords(doc)
 
@@ -122,7 +122,6 @@ def question4(nbClaims = 10000):
     # Reload this claims in case program is re-runing
     claims = []
     claimsID = list(relevantDocs.keys())
-    print("Claims: ",len(claimsID))
     allClaims = load_dataset_json(train_path)
 
     for claim in allClaims:
