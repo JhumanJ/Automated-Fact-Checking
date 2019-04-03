@@ -132,7 +132,7 @@ def question4(nbClaims = 10000):
         if len(claimsID) == 0:
             break
     del allClaims
-    print('Claims loaded.')
+    print('Claims loaded: ',len(claims))
 
     top5Docs = computeTop5dirichlet(claims,relevantDocs)
 
