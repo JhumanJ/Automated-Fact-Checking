@@ -121,7 +121,8 @@ def question4(nbClaims = 10000):
 
     # Reload this claims in case program is re-runing
     claims = []
-    claimsID = relevantDocs.keys()
+    claimsID = list(relevantDocs.keys())
+    print("Claims: ",len(claimsID))
     allClaims = load_dataset_json(train_path)
 
     for claim in allClaims:
