@@ -41,7 +41,8 @@ def findRelevantDocumentsClaims(nbClaims=10000):
         # For each word, find candidate docs in the inverted index
         for word in words:
             if not word in invertedIndex:
-                print('\033[1;31;40m /!\ Error word '+word+ ' not found in inverted index. Continuing.')
+                print('\033[1;31;40m /!\ Error word '+word+ ' not found in inverted index. Continuing. \033[1;37;40m')
+                continue
 
             for (docId, count) in invertedIndex[word]:
                 if docId in docs:
