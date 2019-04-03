@@ -218,6 +218,8 @@ query has to be a list of words
 def computeQueryScore(model, query):
     score = 1.0
     for word in query:
+        if not word in model:
+            continue
         if model[word] == 0:
             return 0
         else:
