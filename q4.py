@@ -110,7 +110,6 @@ def computeTop5dirichlet(claims,relevantDocs):
     return claimsTop5
 
 
-
 def question4(nbClaims = 10000):
 
     # First load claims

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c27384f-8917-4ddd-9aa3-b455f88cfc13" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/lib/stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/stats.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/q4.py" beforeDir="false" afterPath="$PROJECT_DIR$/q4.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,7 +34,7 @@
           <entry key="gitignore" value="1" />
           <entry key="json" value="15" />
           <entry key="jsonl" value="32" />
-          <entry key="py" value="65" />
+          <entry key="py" value="66" />
           <entry key="txt" value="31" />
         </counts>
       </usages-collector>
@@ -41,37 +42,49 @@
         <counts>
           <entry key="JSON" value="15" />
           <entry key="PLAIN_TEXT" value="64" />
-          <entry key="Python" value="65" />
+          <entry key="Python" value="66" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="15" />
           <entry key="gitignore" value="55" />
-          <entry key="py" value="18590" />
+          <entry key="py" value="18616" />
           <entry key="txt" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="76" />
-          <entry key="Python" value="18590" />
+          <entry key="Python" value="18616" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/q4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="84" column="52" selection-start-line="84" selection-start-column="52" selection-end-line="84" selection-end-column="52" />
+            <state relative-caret-position="175">
+              <caret line="93" column="33" lean-forward="true" selection-start-line="93" selection-start-column="33" selection-end-line="93" selection-end-column="33" />
               <folding>
                 <element signature="e#1#35#0" expanded="true" />
-                <marker date="1554326738644" expanded="true" signature="2399:2404" ph="..." />
-                <marker date="1554326738644" expanded="true" signature="2399:3954" ph="..." />
-                <marker date="1554326738644" expanded="true" signature="4114:5276" ph="..." />
+                <marker date="1554327019197" expanded="true" signature="2399:2404" ph="..." />
+                <marker date="1554327019197" expanded="true" signature="2399:3953" ph="..." />
+                <marker date="1554327019197" expanded="true" signature="4113:5275" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/stats.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="239">
+              <caret line="198" lean-forward="true" selection-start-line="198" selection-end-line="198" />
+              <folding>
+                <marker date="1554327520345" expanded="true" signature="2555:2556" ph="..." />
               </folding>
             </state>
           </provider>
@@ -128,8 +141,8 @@
       <find>inverted</find>
       <find>twdm</find>
       <find>query</find>
-      <find>wiki</find>
       <find>line</find>
+      <find>wiki</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -146,7 +159,6 @@
         <option value="$PROJECT_DIR$/data/wiki-pages/.gitignore" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/q2.py" />
-        <option value="$PROJECT_DIR$/lib/stats.py" />
         <option value="$PROJECT_DIR$/data/cache/parsed_wiki.txt" />
         <option value="$PROJECT_DIR$/paths.py" />
         <option value="$PROJECT_DIR$/lib/datasets_parsing.py" />
@@ -154,6 +166,7 @@
         <option value="$PROJECT_DIR$/q3.py" />
         <option value="$PROJECT_DIR$/lib/utils.py" />
         <option value="$PROJECT_DIR$/q4.py" />
+        <option value="$PROJECT_DIR$/lib/stats.py" />
       </list>
     </option>
   </component>
@@ -391,16 +404,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/stats.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="190" column="4" selection-start-line="190" selection-start-column="4" selection-end-line="190" selection-end-column="4" />
-          <folding>
-            <marker date="1553619218001" expanded="true" signature="2555:2556" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -423,13 +426,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/q4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="84" column="52" selection-start-line="84" selection-start-column="52" selection-end-line="84" selection-end-column="52" />
+        <state relative-caret-position="175">
+          <caret line="93" column="33" lean-forward="true" selection-start-line="93" selection-start-column="33" selection-end-line="93" selection-end-column="33" />
           <folding>
             <element signature="e#1#35#0" expanded="true" />
-            <marker date="1554326738644" expanded="true" signature="2399:2404" ph="..." />
-            <marker date="1554326738644" expanded="true" signature="2399:3954" ph="..." />
-            <marker date="1554326738644" expanded="true" signature="4114:5276" ph="..." />
+            <marker date="1554327019197" expanded="true" signature="2399:2404" ph="..." />
+            <marker date="1554327019197" expanded="true" signature="2399:3953" ph="..." />
+            <marker date="1554327019197" expanded="true" signature="4113:5275" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/stats.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="198" lean-forward="true" selection-start-line="198" selection-end-line="198" />
+          <folding>
+            <marker date="1554327520345" expanded="true" signature="2555:2556" ph="..." />
           </folding>
         </state>
       </provider>

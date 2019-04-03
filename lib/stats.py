@@ -194,6 +194,9 @@ def computeDirichletQueryLikelihoodModel(docWords, queryWords, wordsDictionnary,
 
     model = {}
     for key in queryWords:
+        if not key in wordsDictionnary:
+            continue
+
         if not key in wordCounts:
             # Here P(w|D) is 0
             model[key] = (float(constant) / (float(nbWords) + constant)) * (
