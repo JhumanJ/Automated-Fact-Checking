@@ -48,14 +48,14 @@
         <counts>
           <entry key="dummy" value="15" />
           <entry key="gitignore" value="55" />
-          <entry key="py" value="18400" />
+          <entry key="py" value="18508" />
           <entry key="txt" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="76" />
-          <entry key="Python" value="18400" />
+          <entry key="Python" value="18508" />
         </counts>
       </usages-collector>
     </session>
@@ -65,13 +65,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/q4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
+            <state relative-caret-position="356">
+              <caret line="134" column="27" lean-forward="true" selection-start-line="134" selection-start-column="27" selection-end-line="134" selection-end-column="27" />
               <folding>
                 <element signature="e#1#35#0" expanded="true" />
-                <marker date="1554324289567" expanded="true" signature="2392:2397" ph="..." />
-                <marker date="1554324289567" expanded="true" signature="2392:3955" ph="..." />
-                <marker date="1554324289567" expanded="true" signature="4115:4853" ph="..." />
+                <marker date="1554324652395" expanded="true" signature="2399:2404" ph="..." />
+                <marker date="1554324652395" expanded="true" signature="2399:3949" ph="..." />
+                <marker date="1554324652395" expanded="true" signature="4109:5242" ph="..." />
               </folding>
             </state>
           </provider>
@@ -80,8 +80,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/q3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="111" column="72" lean-forward="true" selection-start-line="107" selection-start-column="24" selection-end-line="111" selection-end-column="72" />
+            <state relative-caret-position="306">
+              <caret line="34" column="27" lean-forward="true" selection-start-line="23" selection-start-column="3" selection-end-line="34" selection-end-column="27" />
               <folding>
                 <element signature="e#1#35#0" expanded="true" />
               </folding>
@@ -128,8 +128,8 @@
       <find>inverted</find>
       <find>twdm</find>
       <find>query</find>
-      <find>line</find>
       <find>wiki</find>
+      <find>line</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -255,7 +255,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.20821919" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49919224" visible="true" weight="0.24520548" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49919224" visible="true" weight="0.24657534" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -401,16 +401,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/q3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="111" column="72" lean-forward="true" selection-start-line="107" selection-start-column="24" selection-end-line="111" selection-end-column="72" />
-          <folding>
-            <element signature="e#1#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -421,15 +411,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/q4.py">
+    <entry file="file://$PROJECT_DIR$/q3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
+        <state relative-caret-position="306">
+          <caret line="34" column="27" lean-forward="true" selection-start-line="23" selection-start-column="3" selection-end-line="34" selection-end-column="27" />
           <folding>
             <element signature="e#1#35#0" expanded="true" />
-            <marker date="1554324289567" expanded="true" signature="2392:2397" ph="..." />
-            <marker date="1554324289567" expanded="true" signature="2392:3955" ph="..." />
-            <marker date="1554324289567" expanded="true" signature="4115:4853" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="134" column="27" lean-forward="true" selection-start-line="134" selection-start-column="27" selection-end-line="134" selection-end-column="27" />
+          <folding>
+            <element signature="e#1#35#0" expanded="true" />
+            <marker date="1554324652395" expanded="true" signature="2399:2404" ph="..." />
+            <marker date="1554324652395" expanded="true" signature="2399:3949" ph="..." />
+            <marker date="1554324652395" expanded="true" signature="4109:5242" ph="..." />
           </folding>
         </state>
       </provider>

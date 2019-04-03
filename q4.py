@@ -60,7 +60,7 @@ def findRelevantDocumentsClaims(claims):
     saveDictToJson(relevantDocs,relevantDocsPath)
     return relevantDocs
 
-def computeTop5dirichlet(relevantDocs):
+def computeTop5dirichlet(claims,relevantDocs):
     claimsTop5Path = cache_path + "claims10000Top5.json"
 
     # If already computed just return it
@@ -81,7 +81,7 @@ def computeTop5dirichlet(relevantDocs):
                                                                                           avgWordPerDocument))
 
     claimsTop5 = {}
-    for claim in tqdm(relevantDocs.keys()):
+    for claim in tqdm(claims):
         claimWords = removeStopWords(splitWords(claim['claim']))
         top5 = []
 
@@ -118,7 +118,23 @@ def question4(nbClaims = 10000):
     print("{} claims loaded,".format(nbClaims))
 
     relevantDocs = findRelevantDocumentsClaims(claims)
-    top5Docs = computeTop5dirichlet(relevantDocs)
+
+    # Reload this claims in case program is re-runing
+    claims = []
+    claimsID = relevantDocs.keys()
+    allClaims = load_dataset_json(train_path)
+
+    for claim in allClaims:
+        if claim['id'] in claimsID:
+            claims.append(claim)
+            claimsID.remove(claim['id'])
+
+        if len(claimsID) == 0:
+            break
+    del allClaims
+    print('Claims loaded.')
+
+    top5Docs = computeTop5dirichlet(claims,relevantDocs)
 
     return
 
