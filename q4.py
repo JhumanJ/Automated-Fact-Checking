@@ -16,7 +16,7 @@ To do so, we use the inverted index
 """
 def findRelevantDocumentsClaims(nbClaims=10000):
 
-    relevantDocsPath = cache_path + "relevantDocs.json"
+    relevantDocsPath = cache_path + "relevantDocs"+str(nbClaims)+"Claims.json"
     docInvertedIndexFile = output_path + 'docInvertedIndex.json'
 
     # If already computed just return it
