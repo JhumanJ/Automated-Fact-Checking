@@ -6,7 +6,7 @@ from tqdm import tqdm
 from heapq import heappush, heappushpop
 from q1 import getTextStatistics
 
-import os, json
+import os, json, gc
 
 """
 Uses drichlet to compute 5 most relevant document for each claims.
@@ -59,6 +59,8 @@ def findRelevantDocumentsClaims(nbClaims=10000):
         print(len( relevantDocs[claim['id']]))
 
     # Now save relevant docs to json
+    del invertedIndex
+    gc.collect()
     saveDictToJson(relevantDocs,relevantDocsPath)
     return relevantDocs
 
