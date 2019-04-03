@@ -26,6 +26,7 @@ def findRelevantDocumentsClaims(nbClaims=10000):
 
     # First load claims
     claims = load_dataset_json(train_path)[0:nbClaims]
+    print("{} claims loaded,".format(nbClaims))
 
     # Loading inverted index
     print("Loading inverted index.")
@@ -39,17 +40,20 @@ def findRelevantDocumentsClaims(nbClaims=10000):
 
         # For each word, find candidate docs in the inverted index
         for word in words:
+            if not word in invertedIndex:
+                print('\033[1;31;40m /!\ Error word '+word+ ' not found in inverted index. Continuing.')
+
             for (docId, count) in invertedIndex[word]:
                 if docId in docs:
-                    docs[docId] += count
+                    docs[docId] += 1
                 else:
-                    docs[docId] = count
+                    docs[docId] = 1
 
-        # Now only keep the docs with more than 1/3 of common words
+        # Now only keep the docs with at least two different common words
         relevantDocs[claim['id']] = []
         for key in docs:
-            # If in a given doc we have more than a third of the word present, save it
-            if docs[key] > float(len(words)/3):
+            # If in a given doc we have more than 2 different words in common
+            if docs[key] >= 2:
                 relevantDocs[claim['id']].append(key)
         print(len( relevantDocs[claim['id']]))
 

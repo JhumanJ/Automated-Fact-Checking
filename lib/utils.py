@@ -4,7 +4,7 @@ Utils function
 
 """
 
-import json, re, string
+import json, re, string, time
 from difflib import SequenceMatcher
 
 """
@@ -27,8 +27,10 @@ Opens a json file to return a dict.
 
 
 def openJsonDict(path):
+    start = time.time()
     with open(path) as handle:
         dictdump = json.loads(handle.read())
+    print("File {} loaded in {} seconds.".format(path,time.time()-start))
 
     return dictdump
 
