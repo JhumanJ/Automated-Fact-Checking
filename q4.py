@@ -21,7 +21,7 @@ def findRelevantDocumentsClaims(claims):
 
     # If already computed just return it
     if os.path.isfile(relevantDocsPath):
-        print("Computations already done. Loading results from: {}", relevantDocsPath)
+        print("Computations already done. Loading results from: ", relevantDocsPath)
         return openJsonDict(relevantDocsPath)
 
     # Loading inverted index
@@ -65,7 +65,7 @@ def computeTop5dirichlet(claims,relevantDocs):
 
     # If already computed just return it
     if os.path.isfile(claimsTop5Path):
-        print("Computations already done. Loading results from: {}", claimsTop5Path)
+        print("Computations already done. Loading results from: ", claimsTop5Path)
         return openJsonDict(claimsTop5Path)
 
     # load wiki
@@ -86,8 +86,8 @@ def computeTop5dirichlet(claims,relevantDocs):
         top5 = []
 
         # Find best documents
-        for docId in relevantDocs[claim]:
-            doc = wikiArticles[doc]
+        for docId in relevantDocs[claim['id']]:
+            doc = wikiArticles[docId]
             words = splitWords(doc)
 
             # Compute model and score for document using dirichlet and cosine sim.
