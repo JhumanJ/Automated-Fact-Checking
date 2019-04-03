@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c27384f-8917-4ddd-9aa3-b455f88cfc13" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/q4.py" beforeDir="false" afterPath="$PROJECT_DIR$/q4.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,13 +66,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/q4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="124" column="37" selection-start-line="124" selection-start-column="37" selection-end-line="124" selection-end-column="37" />
+            <state relative-caret-position="203">
+              <caret line="130" column="44" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
               <folding>
                 <element signature="e#1#35#0" expanded="true" />
-                <marker date="1554325851136" expanded="true" signature="2399:2404" ph="..." />
-                <marker date="1554325851136" expanded="true" signature="2399:3949" ph="..." />
-                <marker date="1554325851136" expanded="true" signature="4109:5341" ph="..." />
+                <marker date="1554326203000" expanded="true" signature="2399:2404" ph="..." />
+                <marker date="1554326203000" expanded="true" signature="2399:3949" ph="..." />
+                <marker date="1554326203000" expanded="true" signature="4109:5307" ph="..." />
               </folding>
             </state>
           </provider>
@@ -423,13 +424,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/q4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="124" column="37" selection-start-line="124" selection-start-column="37" selection-end-line="124" selection-end-column="37" />
+        <state relative-caret-position="203">
+          <caret line="130" column="44" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
           <folding>
             <element signature="e#1#35#0" expanded="true" />
-            <marker date="1554325851136" expanded="true" signature="2399:2404" ph="..." />
-            <marker date="1554325851136" expanded="true" signature="2399:3949" ph="..." />
-            <marker date="1554325851136" expanded="true" signature="4109:5341" ph="..." />
+            <marker date="1554326203000" expanded="true" signature="2399:2404" ph="..." />
+            <marker date="1554326203000" expanded="true" signature="2399:3949" ph="..." />
+            <marker date="1554326203000" expanded="true" signature="4109:5307" ph="..." />
           </folding>
         </state>
       </provider>

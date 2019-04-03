@@ -122,14 +122,13 @@ def question4(nbClaims = 10000):
     # Reload this claims in case program is re-runing
     claims = []
     claimsID = list(relevantDocs.keys())
-    print("keys:",relevantDocs.keys())
     print("Claims: ",len(claimsID))
     allClaims = load_dataset_json(train_path)
 
     for claim in allClaims:
         if str(claim['id']) in claimsID:
             claims.append(claim)
-            claimsID.remove(claim['id'])
+            claimsID.remove(str(claim['id']))
 
         if len(claimsID) == 0:
             break
