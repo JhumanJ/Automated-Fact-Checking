@@ -163,7 +163,7 @@ def question4():
         print(evidencesIDs,docIDs)
         # print(len(set(docIDs) & set(evidencesIDs)))
 
-        if len(set(docIDs) & set(evidencesIDs)) == len(set(docIDs)):
+        if len(set(docIDs) & set(evidencesIDs)) > 0:
             count+=1
 
     print(count)
