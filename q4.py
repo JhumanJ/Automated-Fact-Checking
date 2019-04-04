@@ -163,6 +163,11 @@ def question4():
         print(claim['evidence'],evidencesIDs,docIDs)
         # print(len(set(docIDs) & set(evidencesIDs)))
 
+        if len(set(docIDs) & set(evidencesIDs)) == len(set(docIDs)):
+            count+=1
+
+    print(count)
+
 
     return
 
