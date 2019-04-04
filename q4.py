@@ -135,6 +135,19 @@ def question4(nbClaims = 10000):
 
     top5Docs = computeTop5dirichlet(claims,relevantDocs)
 
+    # Now count for how many claims top 5 match with evidences
+    count = 0
+    for claim in claims:
+        evidencesIDs = []
+        for evidenceGroup in  claim['evidence']:
+            for evidence in evidenceGroup:
+                if evidence[2] != "" and not evidence[2] is None:
+                    evidencesIDs.append(evidence[2])
+
+        docIDs = [doc[2] for doc in top5Docs[str(claim['id'])]]
+        print(len(set(docIDs) & set(evidencesIDs)))
+
+
     return
 
     # TODO: remove return above. below is for later when computing idf Below is
