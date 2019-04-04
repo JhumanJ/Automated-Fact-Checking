@@ -160,7 +160,8 @@ def question4():
                     evidencesIDs.append(evidence[2])
 
         docIDs = [doc[1] for doc in top5Docs[str(claim['id'])]]
-        print(len(set(docIDs) & set(evidencesIDs)))
+        print(evidencesIDs,docIDs)
+        # print(len(set(docIDs) & set(evidencesIDs)))
 
 
     return
