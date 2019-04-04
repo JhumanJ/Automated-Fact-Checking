@@ -14,7 +14,11 @@ To speed up computations pre-filters documents to keep only relevant ones.
 
 To do so, we use the inverted index
 """
-def findRelevantDocumentsClaims(claims):
+def findRelevantDocumentsClaims(nbClaims=10000):
+
+    # Generate some claims
+    claims = load_dataset_json(train_path)[0:nbClaims]
+    print("{} claims loaded,".format(nbClaims))
 
     relevantDocsPath = cache_path + "relevantDocs"+str(len(claims))+"Claims.json"
     docInvertedIndexFile = output_path + 'docInvertedIndex.json'
@@ -60,13 +64,30 @@ def findRelevantDocumentsClaims(claims):
     saveDictToJson(relevantDocs,relevantDocsPath)
     return relevantDocs
 
-def computeTop5dirichlet(claims,relevantDocs):
+def computeTop5dirichlet():
     claimsTop5Path = cache_path + "claims10000Top5.json"
 
     # If already computed just return it
     if os.path.isfile(claimsTop5Path):
         print("Computations already done. Loading results from: ", claimsTop5Path)
         return openJsonDict(claimsTop5Path)
+
+    relevantDocs = findRelevantDocumentsClaims()
+
+    # If relevantdocs were generated, find corresponding claims
+    claims = []
+    claimsID = list(relevantDocs.keys())
+    allClaims = load_dataset_json(train_path)
+
+    for claim in allClaims:
+        if str(claim['id']) in claimsID:
+            claims.append(claim)
+            claimsID.remove(str(claim['id']))
+
+        if len(claimsID) == 0:
+            break
+    del allClaims
+    print('Claims loaded: ', len(claims))
 
     # load wiki
     wikiArticles = parse_wiki(wiki_pages_path, wiki_parsed_cache_path)
@@ -110,17 +131,13 @@ def computeTop5dirichlet(claims,relevantDocs):
     return claimsTop5
 
 
-def question4(nbClaims = 10000):
+def question4():
 
-    # First load claims
-    claims = load_dataset_json(train_path)[0:nbClaims]
-    print("{} claims loaded,".format(nbClaims))
+    top5Docs = computeTop5dirichlet()
 
-    relevantDocs = findRelevantDocumentsClaims(claims)
-
-    # Reload this claims in case program is re-runing
+    # Load claim used in top5Docs
     claims = []
-    claimsID = list(relevantDocs.keys())
+    claimsID = list(top5Docs.keys())
     allClaims = load_dataset_json(train_path)
 
     for claim in allClaims:
@@ -132,8 +149,6 @@ def question4(nbClaims = 10000):
             break
     del allClaims
     print('Claims loaded: ',len(claims))
-
-    top5Docs = computeTop5dirichlet(claims,relevantDocs)
 
     # Now count for how many claims top 5 match with evidences
     count = 0
