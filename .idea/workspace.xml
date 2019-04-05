@@ -32,7 +32,7 @@
         <counts>
           <entry key="gitignore" value="1" />
           <entry key="json" value="15" />
-          <entry key="jsonl" value="33" />
+          <entry key="jsonl" value="35" />
           <entry key="py" value="67" />
           <entry key="txt" value="31" />
         </counts>
@@ -40,7 +40,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="15" />
-          <entry key="PLAIN_TEXT" value="65" />
+          <entry key="PLAIN_TEXT" value="67" />
           <entry key="Python" value="67" />
         </counts>
       </usages-collector>
@@ -48,14 +48,14 @@
         <counts>
           <entry key="dummy" value="15" />
           <entry key="gitignore" value="55" />
-          <entry key="py" value="19276" />
+          <entry key="py" value="19332" />
           <entry key="txt" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="76" />
-          <entry key="Python" value="19276" />
+          <entry key="Python" value="19332" />
         </counts>
       </usages-collector>
     </session>
@@ -65,21 +65,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/q4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="165" column="50" selection-start-line="165" selection-start-column="50" selection-end-line="165" selection-end-column="50" />
+            <state relative-caret-position="422">
+              <caret line="141" column="29" selection-start-line="141" selection-start-column="29" selection-end-line="141" selection-end-column="29" />
               <folding>
                 <element signature="e#1#35#0" expanded="true" />
-                <marker date="1554408002547" expanded="true" signature="2996:3001" ph="..." />
+                <marker date="1554457395225" expanded="true" signature="3035:3040" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/train.jsonl">
-          <provider selected="true" editor-type-id="LargeFileEditor">
-            <state relative-caret-position="-159">
-              <caret line="14" column="176" selection-start-line="14" selection-start-column="136" selection-end-line="14" selection-end-column="176" />
             </state>
           </provider>
         </entry>
@@ -142,13 +133,13 @@
       <find>dump</find>
       <find>read</find>
       <find>re</find>
-      <find>relevant</find>
       <find>stop</find>
       <find>inverted</find>
       <find>twdm</find>
       <find>query</find>
       <find>line</find>
       <find>wiki</find>
+      <find>relevant</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -260,7 +251,7 @@
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23263328" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23263328" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -274,7 +265,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.20821919" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49919224" visible="true" weight="0.24657534" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49919224" visible="true" weight="0.24657534" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32876712" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -357,16 +348,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/shared_task_test.jsonl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/shared_task_dev.jsonl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="134" selection-start-line="1" selection-start-column="128" selection-end-line="1" selection-end-column="134" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/cache/parsed_wiki_lines.txt" />
     <entry file="file://$PROJECT_DIR$/data/cache/parsed_wiki.txt" />
     <entry file="file://$PROJECT_DIR$/output/termFrequencies.json" />
@@ -433,13 +414,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/shared_task_dev.jsonl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="134" selection-start-line="1" selection-start-column="128" selection-end-line="1" selection-end-column="134" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/shared_task_test.jsonl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/q4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="165" column="50" selection-start-line="165" selection-start-column="50" selection-end-line="165" selection-end-column="50" />
+        <state relative-caret-position="422">
+          <caret line="141" column="29" selection-start-line="141" selection-start-column="29" selection-end-line="141" selection-end-column="29" />
           <folding>
             <element signature="e#1#35#0" expanded="true" />
-            <marker date="1554408002547" expanded="true" signature="2996:3001" ph="..." />
+            <marker date="1554457395225" expanded="true" signature="3035:3040" ph="..." />
           </folding>
         </state>
       </provider>
