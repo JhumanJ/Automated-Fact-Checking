@@ -136,7 +136,7 @@ def question4():
 
     #test loading word2vec
     # Load vectors directly from the file
-    model = KeyedVectors.load_word2vec_format('../GoogleGoogleNews-vectors-negative300.bin', binary=True)
+    model = KeyedVectors.load_word2vec_format('../GoogleNews-vectors-negative300.bin', binary=True)
     # Access vectors for specific words with a keyed lookup:
     vector = model['easy']
     print(vector.shape,vector)
