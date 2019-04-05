@@ -7,7 +7,7 @@ from heapq import heappush, heappushpop
 from q1 import getTextStatistics
 from gensim.models import KeyedVectors
 
-import os, json, gc
+import os, json, gc, time
 
 """
 Uses drichlet to compute 5 most relevant document for each claims.
@@ -131,12 +131,19 @@ def computeTop5dirichlet():
 
     return claimsTop5
 
+def loadGoogleWord2Vec(path='../GoogleNews-vectors-negative300.bin'):
+
+    print('Loading google trained word2vec.')
+    start = time.time()
+    model = KeyedVectors.load_word2vec_format('../GoogleNews-vectors-negative300.bin', binary=True)
+    print("Google model loaded in {} sec.".format(time.time()-start))
+
+    return model
 
 def question4():
 
-    #test loading word2vec
     # Load vectors directly from the file
-    model = KeyedVectors.load_word2vec_format('../GoogleNews-vectors-negative300.bin', binary=True)
+    model = loadGoogleWord2Vec()
     # Access vectors for specific words with a keyed lookup:
     vector = model['easy']
     print(vector.shape,vector)
