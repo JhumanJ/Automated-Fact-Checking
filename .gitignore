@@ -1,3 +1,5 @@
 data/cache/*
 data/wiki-pages/*
 output/*
+__MACOSX/*
+__pycache__/*
