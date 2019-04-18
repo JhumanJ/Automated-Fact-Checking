@@ -1,12 +1,13 @@
 
 from lib.datasets_parsing import *
 from lib.stats import *
+from lib.utils import *
 from paths import *
 from tqdm import tqdm
 from q1 import getTextStatistics
 from heapq import heappush, heappushpop
 
-import os, json
+import os, json, csv
 
 def question3():
 
@@ -16,7 +17,33 @@ def question3():
     # If already computed just return it
     if os.path.isfile(fiveMostSimilarDoc):
         print("Computation already done. Loading results from: {}",fiveMostSimilarDoc)
-        print (openJsonDict(fiveMostSimilarDoc))
+        top5 = openJsonDict(fiveMostSimilarDoc)
+
+        result = []
+        resultLaplace = []
+        resultJelinek = []
+        resultDirichlet = []
+        for claimId in top5:
+            print(claimId,top5[claimId])
+
+            result.append([claimId] + [item[1] for item in top5[claimId]['no-smooth']])
+            resultLaplace.append([claimId] + [item[1] for item in top5[claimId]['laplace']])
+            resultJelinek.append([claimId] + [item[1] for item in top5[claimId]['jelinek']])
+            resultDirichlet.append([claimId] + [item[1] for item in top5[claimId]['dirichlet']])
+
+        header = ['claim id',	'doc id_1',	'doc id_2',	'doc id_3','doc id_4','doc id_5']
+
+        csvData = [ ['no smoothing'], header] + result + [ ['laplace smoothing'], header] + resultLaplace + [['jelinek smoothing'], header ] + resultJelinek + [ ['dirichlet smoothing'], header] + resultDirichlet
+
+
+        # Save result as csv
+        print("saving result in csv")
+        with open(output_path+'q3.csv', mode='w') as file:
+            writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+            for row in csvData:
+                writer.writerow(row)
+
         return
 
 
@@ -117,6 +144,13 @@ def question3():
 
     print(claimsScore)
     return
+
+wikiArticles = parse_wiki(wiki_pages_path, wiki_parsed_cache_path)
+wordsDictionnary = getTextStatistics()
+vocSize = len(wordsDictionnary.keys())
+collectionFrequency = sum(wordsDictionnary.values())
+avgWordPerDocument = float(collectionFrequency)/len(wikiArticles)
+print("Vocabulary size: {}, collection frequency: {}, avg word per document: {}".format(vocSize,collectionFrequency,avgWordPerDocument))
 
 
 

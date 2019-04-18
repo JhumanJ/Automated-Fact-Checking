@@ -19,7 +19,6 @@ from tqdm import tqdm
 Given a text, returns a dictionnary with tf score for each words
 """
 
-
 def computeTf(words):
     nbWords = len(words)
     wordCounts = wordCount(words)
@@ -35,7 +34,6 @@ Given a text, returns a dictionnary with idf score for each words
 
 idToIgnore parameter used to avoid computing IDF over document itself
 """
-
 
 def computeIDF(words, invertedIndex, documentCount, docIdf=None):
     # Only unique word matters
@@ -118,7 +116,7 @@ Mostly used for Q3
 """
 
 """
-Given a document and a set of words (possibly used in a query), return 
+Given a document and a set of words (possibly used in a query), return
 the query likelyhood model
 
 So this is without smoothing!
@@ -143,7 +141,6 @@ def computeQueryLikelihoodModel(docWords, queryWords):
 Same as above with Laplace smoothing.
 """
 
-
 def computeLaplaceQueryLikelihoodModel(docWords, queryWords, vocSize):
     nbWords = len(docWords)
     wordCounts = wordCount(docWords)
@@ -165,7 +162,6 @@ def computeLaplaceQueryLikelihoodModel(docWords, queryWords, vocSize):
 """
 Same as above with jelinek-mercer smoothing.
 """
-
 
 def computeJelinekQueryLikelihoodModel(docWords, queryWords, wordsDictionnary, collectionFrequency, constant=0.5):
     nbWords = len(docWords)

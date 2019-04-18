@@ -4,6 +4,7 @@ Graph function
 
 import matplotlib.pyplot as plt
 import numpy as np
+from paths import *
 
 """
 Show bar chart
@@ -15,7 +16,8 @@ def barChart(x,y,label=False,name='basic-bar'):
     if label:
         plt.xticks(y_pos, x)
     plt.yticks()
-    plt.show()
+    plt.savefig(graph_path+name+'.png')
+    plt.close()
 
 
 """
@@ -37,7 +39,5 @@ def lineChart(x, y=None, x_label = None,y_label = None, title='Line Chart'):
         plt.ylabel(y_label)
 
     plt.title(title)
-    plt.show()
-
-
-
+    plt.savefig(graph_path+title+'.png')
+    plt.close()

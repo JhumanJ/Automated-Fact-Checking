@@ -46,11 +46,13 @@ Create dataset of frequencies, plot it to verify Zip's law
 """
 def question1():
     wordsDictionnary = getTextStatistics()
+    collectionFrequency = sum(wordsDictionnary.values())
+
     # First graph of rank vs frequency
     lineChart(sorted(list(wordsDictionnary.values()),reverse=True),
               x_label="Rank (by decreasing frequency)",
               y_label="Frequency",
-              title="Word distribution")
+              title="Distribution of term frequencies")
 
     # Now create secund graph with log values
     sortedDictionnary = sorted(wordsDictionnary.items(), key=lambda kv: kv[1])
@@ -71,10 +73,20 @@ def question1():
     for idx, value in enumerate(sortedDictionnary):
         rankDatasetX.append((totalLength - idx) * value[1])
 
-    lineChart(rankDatasetX, x_label="rank", y_label="rank*frequency", title="Zip's Law")
+    lineChart(rankDatasetX, x_label="rank", y_label="rank*frequency", title="Zip's Law Verification")
     print("Avg k: {}".format(sum(rankDatasetX)/totalLength))
     print("Total length: {}".format(totalLength))
     print("So k is almost the same as the last rank.")
+
+    # Finally plot r.Pr 􏰀to make sure it's approximately c = 0.1
+    # Now plot zip law: rank * frequency
+    rankDatasetX = []
+
+    for idx, value in enumerate(sortedDictionnary):
+        rankDatasetX.append((totalLength - idx) * (value[1]/collectionFrequency))
+    lineChart(rankDatasetX, x_label="rank", y_label="rank*Prob. word occurence", title="Zip's Law Verification (with probability)")
+    print("Avg c: {}".format(sum(rankDatasetX)/totalLength))
+
 
 if __name__ == "__main__":
     question1()

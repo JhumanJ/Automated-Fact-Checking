@@ -1,10 +1,12 @@
 
 from lib.datasets_parsing import *
 from lib.stats import *
+from lib.utils import *
+
 from paths import *
 from tqdm import tqdm
 
-import os, json
+import os, json, csv
 
 docInvertedIndexFile = output_path + 'docInvertedIndex.json'
 docIdfFile = output_path + 'docIdf.json'
@@ -37,6 +39,7 @@ def question2():
         print("Claim '{}': {}".format(claim['id'],claim['claim']))
     print('\n')
 
+    csvData = [['claim id',	'doc id_1',	'doc id_2',	'doc id_3','doc id_4','doc id_5']]
     scores = getClaimsVsDocScore(claims, wikiArticles)
     for id in scores:
         claim = scores[id]
@@ -45,11 +48,19 @@ def question2():
             if len(top5) > 5:
                 break
             top5.append((docId, score))
+        csvData.append([id]+[item[0] for item in top5])
         print("Claim id: {}\nMost similar documents:".format(id))
         for docId, score in top5:
             print("\t- Document '{}' with score {}".format(docId,score))
 
+    # Save result as csv
+    with open(output_path+'q2.csv', mode='w') as file:
+        writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
+        for row in csvData:
+            writer.writerow(row)
+
+    print('Ouput CSV written.')
 
 """
 Compute an inverted index for a set of documents
@@ -110,7 +121,7 @@ def computedTfIdfForDocs(claimsTfIdf,wikiArticles,docIdf):
 
     if os.path.isfile(cache_path+'relevant-docs.json'):
         print("Loading relevant documents idf file.")
-        relevantDocs = openJsonDict(docIdfFile)
+        relevantDocs = openJsonDict(cache_path+'relevant-docs.json')
         print("Relevant documents loaded. Length: {}".format(len(relevantDocs)))
     else:
 
@@ -205,6 +216,5 @@ def getClaimsVsDocScore(claims,wikiArticles):
     saveDictToJson(scores, cosineSimFile)
 
     return scores
-
 
 question2()
