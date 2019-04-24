@@ -7,6 +7,7 @@ from tqdm import tqdm
 import os, json, gc, time, random
 import pandas as pd
 
+from q4_q5 import loadGoogleWord2Vec
 
 # Import for lstm text classification
 from sklearn.model_selection import train_test_split
@@ -45,9 +46,33 @@ def arrayToSentenceData(claims):
 
     return dataset
 
+def claimEmbedding(claim):
+
+    """
+        Again use wordembedding of google to transform a claim into a matrix
+    """
+
+    # Load google word2vector trained dataset
+    model = loadGoogleWord2Vec()
+
+    claim = removeStopWords(splitWords(claim))
+    count = 0
+    sentence = [0]*300
+    for word in claim:
+        if word in model:
+            count += 1
+            # Sum all dimensions
+            for index, value in enumerate(model[word]):
+                sentence[index] += value
+        # Finally average everything
+        for index, value in enumerate(sentence):
+            sentence[index] = sentence[index] / float(count)
+
+    return sentence
+
 def getRNN(inputLenght,maxWords):
     inputs = Input(name='inputs',shape=[inputLenght])
-    layer = Embedding(maxWords,50,input_length=inputLenght)(inputs)
+    # layer = Embedding(maxWords,50,input_length=inputLenght)(inputs)
     layer = LSTM(64)(layer)
     layer = Dense(256,name='FC1')(layer)
     layer = Activation('relu')(layer)
@@ -82,32 +107,41 @@ def question6():
         testDataset = arrayToSentenceData(claims)
         saveDictToJson({'data':testDataset},testingTextDataPath)
 
-    dataset = pd.DataFrame(dataset,columns=['label','data'])
-    testDataset = pd.DataFrame(testDataset,columns=['label','data'])
-    print(dataset.head())
-    print(testDataset.head())
+    # Apply word embedding to training data using google trained word2vec
+    temp = []
+    for claim in dataset['data']:
+        temp.append(claimEmbedding(claim))
+    dataset['data'] = temp
 
-    supportCount = len(dataset[dataset['label']==1])
-    print("Training: {} labels SUPPORTS and {} label REFUTES".format(supportCount, len(dataset)-supportCount))
-    supportCount = len(testDataset[testDataset['label']==1])
-    print("Testing: {} labels SUPPORTS and {} label REFUTES".format(supportCount, len(testDataset)-supportCount))
+    # Apply word embedding to test data using google trained word2vec
+    temp = []
+    for claim in testDataset['data']:
+        temp.append(claimEmbedding(claim))
+    testDataset['data'] = temp
+
+
+    # supportCount = len(dataset[dataset['label']==1])
+    # print("Training: {} labels SUPPORTS and {} label REFUTES".format(supportCount, len(dataset)-supportCount))
+    # supportCount = len(testDataset[testDataset['label']==1])
+    # print("Testing: {} labels SUPPORTS and {} label REFUTES".format(supportCount, len(testDataset)-supportCount))
 
     # build datasets
     X_train = dataset['data']
-    Y_train = dataset['label'].values
+    Y_train = dataset['label']
     X_test = testDataset['data']
-    Y_test = testDataset['label'].values
+    Y_test = testDataset['label']
 
-    # Word embedding
+    # Word embedding settings (300 dimensions in google word2vec)
+    max_len = 300
     max_words = 1000
-    max_len = 150
-    tok = Tokenizer(num_words=max_words)
 
-    tok.fit_on_texts(X_train)
-    sequences = tok.texts_to_sequences(X_train)
-    sequences_matrix = sequence.pad_sequences(sequences,maxlen=max_len)
-    print(X_train.head())
 
+    # tok = Tokenizer(num_words=max_words)
+    #
+    # tok.fit_on_texts(X_train)
+    # sequences = tok.texts_to_sequences(X_train)
+    # sequences_matrix = sequence.pad_sequences(sequences,maxlen=max_len)
+    # print(X_train.head())
 
     # Build network
     model = getRNN(max_len,max_words)
@@ -115,13 +149,19 @@ def question6():
     model.compile(loss='binary_crossentropy',optimizer=RMSprop(),metrics=['accuracy'])
 
     # Train network
-    model.fit(sequences_matrix,Y_train,batch_size=128,epochs=100,validation_split=0.2,callbacks=[EarlyStopping(monitor='val_loss',min_delta=0.0001)])
+    # todo: increase number of epochs
+    model.fit(X_train,Y_train,batch_size=128,epochs=1,validation_split=0.2,callbacks=[EarlyStopping(monitor='val_loss',min_delta=0.0001)])
 
     # test
     test_sequences = tok.texts_to_sequences(X_test)
     test_sequences_matrix = sequence.pad_sequences(test_sequences,maxlen=max_len)
     accr = model.evaluate(test_sequences_matrix,Y_test)
+    results = model.predict(test_sequences_matrix)
+    print(results)
     print('Test set\n  Loss: {:0.3f}\n  Accuracy: {:0.3f}'.format(accr[0],accr[1]))
+
+    # Test set
+    # Loss: 0.633  Accuracy: 0.628
 
 
 question6()

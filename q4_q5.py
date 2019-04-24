@@ -476,5 +476,5 @@ def question4():
 
 
 
-
-question4()
+if __name__ == "__main__":
+    question4()
